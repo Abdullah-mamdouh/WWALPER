@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "757357545700",
+    "project_id": "wallpaper-fbf2d",
+    "storage_bucket": "wallpaper-fbf2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757357545700:android:0bf50546f75debe31e04f1",
+        "android_client_info": {
+          "package_name": "com.example.wwalper_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo3Vcs3bSCKeElT9yEJoco3f8Eh0s99V4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
