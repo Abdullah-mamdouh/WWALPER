@@ -5,16 +5,6 @@ class ApiWallpaperConstants {
   static const String photosSearchEndPoint = "search";
 }
 
-class ApiNotificationConstants {
-  static const String baseUrl = "https://fcm.googleapis.com/fcm/";
-  static const Map<String, dynamic> headers = {
-    "Content-Type": "application/json",
-    "Authorization": "key=AAAAy4FeQq8:APA91bG4WQWFPCNHY_tA1b9pelCn7ENJUZT1GRKHUC8m-GC8pwcZ3saAngB5uRE0EaUcKiwGLSmEpqNQMkIlhmFaU_9--HykpZyijl-yhQ1f6q67zoB7GnfjekY2bzqmbrU6rq3VUHHH"
-  };
-
-  static const String send = "send";
-}
-
 class ApiErrors {
   static const String badRequestError = "badRequestError";
   static const String noContent = "noContent";

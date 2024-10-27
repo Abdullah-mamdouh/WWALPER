@@ -16,6 +16,7 @@ class AppTextFormField extends StatelessWidget {
   final Color? backgroundColor;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
+  final Function(String)? onChangeFunction;
   const AppTextFormField({
     super.key,
     this.contentPadding,
@@ -30,6 +31,7 @@ class AppTextFormField extends StatelessWidget {
     this.backgroundColor,
     this.controller,
     required this.validator,
+    this.onChangeFunction,
   });
 
   @override
@@ -78,6 +80,8 @@ class AppTextFormField extends StatelessWidget {
       ),
       obscureText: isObscureText ?? false,
       style: TextStyles.font14DarkBlueMedium,
+      onChanged: onChangeFunction,
+
       validator: validator ??
               (val) {
             return null;

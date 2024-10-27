@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:wwalper_app/features/home/data/models/wallpaper_model.dart';
 
@@ -12,11 +13,15 @@ abstract class WallpaperApiRepo {
   factory WallpaperApiRepo(Dio dio, {String baseUrl}) = _WallpaperApiRepo;
 
   @GET('${ApiWallpaperConstants.photosSearchEndPoint}?query={category}&page={page}&per_page=10')
-  Future<List<PhotosModel>> getWallpapers(
-      @Path('query') String category,
-      @Path('page') String page,
+  Future<PhotosModel> getWallpapers(
+      @Path('category') String category,
+      @Path('page') dynamic page,
       );
 
+  @GET('${ApiWallpaperConstants.photosSearchEndPoint}?query={category}')
+  Future<PhotosModel> searchWallpaper(
+      @Path('category') String category,
+      );
 }
 
 
@@ -26,10 +31,21 @@ class WallpaperRepo {
 
   WallpaperRepo({required this.wallpaperApiRepo});
 
-  Future<ServiceResult<List<PhotosModel>>> getWallpapers(
+  Future<ServiceResult<PhotosModel>> getWallpapers(
       {required String category, required dynamic page}) async{
     try {
       final response = await wallpaperApiRepo.getWallpapers(category, page);
+      return ServiceResult.success(response);
+    } catch (errro) {
+      debugPrint("${errro}78888888888888888888888888888888888888");
+      return ServiceResult.failure(Handler.handle(ApiErrorHandler(errro)));
+    }
+  }
+
+  Future<ServiceResult<PhotosModel>> searchWallpapers(
+      {required String category}) async{
+    try {
+      final response = await wallpaperApiRepo.searchWallpaper(category);
       return ServiceResult.success(response);
     } catch (errro) {
       return ServiceResult.failure(Handler.handle(ApiErrorHandler(errro)));

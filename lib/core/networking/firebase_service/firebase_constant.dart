@@ -1,8 +1,4 @@
 
-
-import 'package:firebase_core/firebase_core.dart';
-
-
  /// expected errors of firebase auth
 class FirebaseErrors {
   // static const String successful =

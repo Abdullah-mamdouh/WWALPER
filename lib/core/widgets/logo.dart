@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:wwalper_app/core/utils/app_images.dart';
+import 'package:wwalper_app/core/utils/app_assets.dart';
 
 class InfanciaLogo extends StatelessWidget {
   final double? height;
@@ -14,7 +14,7 @@ class InfanciaLogo extends StatelessWidget {
       children: [
         const Spacer(),
         SvgPicture.asset(
-          AppImages.appLogo,
+          AppAssets.appLogo,
           width:width?? 225.w,
           height:height??  225.h,
         ),

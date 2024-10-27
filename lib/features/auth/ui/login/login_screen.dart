@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:wwalper_app/core/helpers/extensions/navigator.dart';
 import 'package:wwalper_app/core/helpers/spacing.dart';
 import 'package:wwalper_app/core/helpers/validator/validators.dart';
@@ -11,12 +10,11 @@ import 'package:wwalper_app/core/theming/styles.dart';
 import 'package:wwalper_app/core/utils/app_strings.dart';
 import 'package:wwalper_app/core/widgets/app_text_button.dart';
 import 'package:wwalper_app/core/widgets/app_text_form_field.dart';
-import 'package:wwalper_app/features/auth/ui/login/widgets/login_bloc_listener.dart';
+import 'package:wwalper_app/features/auth/ui/login/widgets/login_provider_consumer.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/utils/app_assets.dart';
-import '../../logic/sign_in_cubit/sign_in_cubit.dart';
-import '../widgets/arrow_back_widget.dart';
+import '../../logic/sign_in_provider/sign_in_provider.dart';
 import '../widgets/out_line_button_widget.dart';
 import '../widgets/text_hint_widget.dart';
 
@@ -28,11 +26,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool password = false;
   @override
-  void initState() {
-    super.initState();
-    SignInCubit.get(context).fetchUserLoginCredentials();
-  }
+  // void initState() {
+  //   super.initState();
+  //   Provider.of<SignInProvider>(context, listen: false)
+  //       .fetchUserLoginCredentials();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               verticalSpace(40),
-              ArrowBackWidget(),
+              //ArrowBackWidget(),
               verticalSpace(20),
               Text(
                 AppStrings.letsSignkey,
@@ -55,25 +55,35 @@ class _LoginScreenState extends State<LoginScreen> {
               TextHintWidget(text: AppStrings.welcomekey),
               verticalSpace(30),
               Form(
-                key: context.read<SignInCubit>().formKey,
+                key: context.read<SignInProvider>().formKey,
                 child: Column(
                   children: [
                     AppTextFormField(
-                        controller: context.read<SignInCubit>().emailController,
+                        controller:
+                            context.read<SignInProvider>().emailController,
                         hintText: AppStrings.enterYourEmailKey,
                         keyboardType: TextInputType.emailAddress,
                         validator: emailValidator()),
-                    verticalSpace(10),
+                    verticalSpace(15),
                     AppTextFormField(
                       controller:
-                          context.read<SignInCubit>().passwordController,
+                          context.read<SignInProvider>().passwordController,
                       hintText: AppStrings.enterYourPasswordkey,
-                      suffixIcon: Icon(
-                        Icons.visibility_outlined,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            password = !password;
+                          });
+                        },
+
+                        icon: !password
+                            ? Icon(Icons.visibility_outlined)
+                            : Icon(Icons.visibility_off_outlined),
                         color: ColorsManager.grayHintColor,
                       ),
                       validator: passwordValidator(),
                       keyboardType: TextInputType.visiblePassword,
+                      isObscureText: password,
                     ),
                     verticalSpace(20),
                     Align(
@@ -85,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    verticalSpace(20),
+                    verticalSpace(30),
                     BouncingButton(
                       child: Text(
                         AppStrings.loginKey,
@@ -99,10 +109,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextHintWidget(text: AppStrings.socialAccountKey),
                     verticalSpace(10),
                     BouncingButton(
-                      icon: SvgPicture.asset(
+                      color: ColorsManager.blueColor,
+                      icon: Image.asset(
                         AppAssets.facebook,
-                        width: 15.w,
-                        height: 26.h,
+                        height: 30.h,
                       ),
                       child: Text(
                         AppStrings.signInFacebookKey,
@@ -110,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       onPress: () {},
                     ),
-                    verticalSpace(10),
+                    verticalSpace(15),
                     AppOutLineButton(
                         text: AppStrings.signInGoogleKey,
                         style: TextStyles.font16WhiteSemiBold
@@ -142,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              LoginBlocListener(),
+              const LoginProviderListener(),
             ],
           ),
         ),
@@ -151,8 +161,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void validateThenDoLogin(BuildContext context) {
-    if (context.read<SignInCubit>().formKey.currentState!.validate()) {
-      context.read<SignInCubit>().emitSignInStates();
+    if (context.read<SignInProvider>().formKey.currentState!.validate()) {
+      context.read<SignInProvider>().emitSignInStates();
     }
   }
 }

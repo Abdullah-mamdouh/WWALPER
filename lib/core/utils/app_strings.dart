@@ -1,4 +1,8 @@
 class AppStrings {
+
+  /// Commen Strings
+  static const String tryAgainKey = 'Try Again...';
+
   /// Validation Strings
   static const String emailEmpty = "Please enter an email address";
   static const String validEmail = "Please enter a valid email address";
@@ -8,7 +12,7 @@ class AppStrings {
   static const String validConfirmPass = "Password do not match";
   static const String emptyFullName = "Please enter your full name";
 
-  /// Register ui Strings
+  /// Strings of Register Screen
   static const String gettingStartedkey = 'Getting Started';
   static const String createAccountKey = 'Create an account to continue!';
   static const String userNameKey = 'Username';
@@ -21,11 +25,9 @@ class AppStrings {
   static const String googleKey = 'Google';
   static const String alreadyHaveAnAccount = "Already Have An Account?";
   static const String signinKey = 'Sign In';
-  static const String registerSuccessfull = 'Account created Successfully';
+  static const String registerSuccessfullKey = 'Account created Successfully';
 
-
-  /// Register ui Strings
-
+  /// Strings of Login Screen
   static const String letsSignkey = "Let's Sign You In";
   static const String welcomekey = "Welcome back, You've been missed";
   static const String enterYourEmailKey = 'Enter your email';
@@ -37,5 +39,20 @@ class AppStrings {
   static const String loginKey = 'Login';
   static const String signupKey = 'Sign Up';
 
+  /// Warning Screen
+  static const String noFoundKey = 'No Found';
+  static const String warningDescripKey = 'Oops, something went wrong please try again';
 
+  /// No Internet Screen
+  static const String noInternetKey = "No Internet Connection";
+  static const String noInternetDescripKey = 'Its look like you\'re not connected to the internet';
+
+ /// Strings of Search Screen
+  static const String searchKey = 'Search';
+  static const String searchingDescripKey = 'Searching through hundreds of photos will be\n so much easier now';
+  static const String searchHintKey = 'Search...';
+  /// Strings of Favorite Screen
+  static const String favoriteKey = 'Favorites';
+  static const String favoritePhotosDescripKey = 'You\'ve marked all of these as favorite!';
+  static const String noFavoritePhotosKey = 'Oops! no favorite to display';
 }

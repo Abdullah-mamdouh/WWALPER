@@ -8,12 +8,14 @@ class ColorsManager {
   static const Color blackColor = Color(0xff000000);
   static const Color whiteColor = Color(0xffFFFFFF);
   static const Color redColor = Color(0xffFF2C54);
+  static const Color deepOrangeColor = Colors.deepOrange;
   static const Color cursorColor = Color(0xffEBC00D);
   static const Color walletColor = Color(0xffE0B116);
   static const Color greenColor = Color(0xff38D39F);
   static const Color greenBoldColor = Color(0xff34C695);
   static const Color hintTextColor = Color(0xffA7A7A7);
   static const Color grayLight = Color(0xff999999);
+  static const Color moreLightGray = Color(0xFFC2C2C2);
   static const Color whiteGrayColor = Color(0xffF5F6F9);
   static const Color whiteBlueColor = Color(0xffE6E9F1);
 
@@ -22,12 +24,12 @@ class ColorsManager {
   static const Color mainRed = Color(0xFFDC6951);
   static const Color darkBlue = Color(0xFF242424);
   static const Color gray = Color(0xFF757575);
-  static const Color lightGray = Color(0xFFC2C2C2);
   static const Color lighterGray = Color(0xFFEDEDED);
-  static const Color moreLightGray = Color(0xFFFDFDFF);
+  //static const Color moreLightGray = Color(0xFFFDFDFF);
   static const Color lightScaffoldBackgroundColor = Color(0xFFF4F6F7);
 
   //044E8E  //#55B9EB
+  static const Color blueColor = Color(0xff3b82f6);
   static const Color blueBorder = Color(0xFF044E8E);
   static const Color lightBlue = Color(0xFF63B9E9);
   //55B9EB

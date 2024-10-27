@@ -1,30 +1,37 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/networking/internet_checker.dart';
+import '../../../../core/utils/constants.dart';
 import '../../data/models/login_model.dart';
 import '../../data/repo/auth_repo.dart';
 import 'sign_in_state.dart';
 
-class SignInCubit extends Cubit<SignInState> {
+
+class SignInProvider extends ChangeNotifier {
   final AuthRepo authRepo;
-  InternetCheckerImpl internetChecker;
+  final InternetCheckerImpl internetChecker;
   final SharedPreferences sharedPreferences;
 
-  SignInCubit({
+  SignInProvider({
     required this.authRepo,
     required this.sharedPreferences,
     required this.internetChecker,
-  }) : super(const SignInState.initial());
-
-  static SignInCubit get(context) => BlocProvider.of<SignInCubit>(context);
+  });
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  SignInState _state = SignInState.initial();
+  SignInState get state => _state;
+
+  void _setState(SignInState newState) {
+    _state = newState;
+    notifyListeners();
+  }
 
   Future<void> saveUserLoginCredentials(LoginModel loginCredentials) async {
     await sharedPreferences.setString(
@@ -38,30 +45,37 @@ class SignInCubit extends Cubit<SignInState> {
       );
       emailController.text = fetchedLoginCredentials.email;
       passwordController.text = fetchedLoginCredentials.password;
+      isLoggedInUser = true;
+      notifyListeners();
     }
   }
 
   Future<void> clearUserLoginCredentials() async {
     if (sharedPreferences.containsKey('LoginCredentials')) {
       sharedPreferences.remove('LoginCredentials');
+      emailController.clear();
+      passwordController.clear();
+      notifyListeners();
     }
   }
 
-  void emitSignInStates() async {
-    emit(const SignInState.loading());
+  Future<void> emitSignInStates() async {
+    _setState(SignInState.loading());
     final loginCredentials = LoginModel(
         email: emailController.text, password: passwordController.text);
     if (await internetChecker.isConnected) {
       final response = await authRepo.signIn(loginCredentials);
-      response.when(success: (loginModel) {
-        emit(SignInState.success(loginModel));
-        debugPrint(loginModel.toString());
-        saveUserLoginCredentials(loginCredentials);
-      }, failure: (error) {
-        emit(SignInState.error(error: error.errorModel.message ?? ''));
-      });
+      response.when(
+        success: (loginModel) {
+          _setState(SignInState.success(loginModel));
+          saveUserLoginCredentials(loginCredentials);
+        },
+        failure: (error) {
+          _setState(SignInState.error(error: error.errorModel.message ?? ''));
+        },
+      );
     } else {
-      emit(SignInState.error(error: 'No Internet Connection' ?? ''));
+      _setState(SignInState.error(error: 'No Internet Connection'));
     }
   }
 }

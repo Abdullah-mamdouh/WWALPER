@@ -5,11 +5,13 @@ class MyIconButton extends StatefulWidget {
       {Key? key,
       required this.icon,
       required this.iconName,
-      required this.action})
+      required this.action,
+      this.fillIconColor})
       : super(key: key);
   IconData icon;
   String iconName;
   Function action;
+  Color? fillIconColor;
 
   @override
   State<MyIconButton> createState() => _MyIconButtonState();
@@ -35,7 +37,7 @@ class _MyIconButtonState extends State<MyIconButton> {
                   //Icons.download_rounded
                   widget.icon,
                   size: 40,
-                  color: Colors.white,
+                  color: widget.fillIconColor ?? Colors.white,
                 ),
                 onPressed: () async {
                   widget.action();

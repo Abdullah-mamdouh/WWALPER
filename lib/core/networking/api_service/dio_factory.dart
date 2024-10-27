@@ -8,18 +8,24 @@ class DioFactory {
   static Dio? dio;
 
   static Dio getDio() {
-    Duration timeOut = const Duration(seconds: 30);
+    Duration timeOut = const Duration(seconds: 1260);
 
     if (dio == null) {
       dio = Dio();
       dio!
         ..options.connectTimeout = timeOut
         ..options.receiveTimeout = timeOut;
+      addDioHeaders();
       addDioInterceptor();
-      return dio!;
-    } else {
-      return dio!;
     }
+    return dio!;
+  }
+
+  static void addDioHeaders() async {
+    dio?.options.headers = {
+      'Authorization':
+      '563492ad6f917000010000015fe4eddae782456a8d1783a3951766de'
+    };
   }
 
   static void addDioInterceptor() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wwalper_app/core/theming/colors.dart';
 
 import '../../../../core/theming/styles.dart';
@@ -11,8 +12,9 @@ class TextHintWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyles.font13WhiteRegular.copyWith(
-        color: ColorsManager.hintTextColor
+      style: TextStyles.font15BlackSemiBold.copyWith(
+        color: ColorsManager.hintTextColor,
+            fontSize: 13.sp,
       ),
     );
   }

@@ -3,11 +3,12 @@ import 'package:wwalper_app/core/theming/styles.dart';
 
 class HeaderText extends StatelessWidget {
   final String text;
-  HeaderText({super.key, required this.text});
+  final TextStyle? style;
+  HeaderText({super.key, required this.text, this.style});
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: TextStyles.font20MainRedBold);
+    return Text(text, style: style ?? TextStyles.font20MainRedBold);
   }
 }
 

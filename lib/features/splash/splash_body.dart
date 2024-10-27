@@ -1,8 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wwalper_app/core/helpers/extensions/navigator.dart';
+import 'package:wwalper_app/core/helpers/spacing.dart';
 import 'package:wwalper_app/core/routing/routes.dart';
+import 'package:wwalper_app/core/utils/app_assets.dart';
 
+import '../../core/utils/constants.dart';
+import '../auth/logic/sign_in_provider/sign_in_provider.dart';
 
 class SplashBody extends StatefulWidget {
   const SplashBody({Key? key}) : super(key: key);
@@ -15,8 +20,11 @@ class _SplashBodyState extends State<SplashBody>
     with SingleTickerProviderStateMixin {
   late Timer _timer;
 
-  _goNext() => context.pushReplacementNamed(Routes.loginScreen) ;
-   
+  _goNext() =>
+    Provider.of<SignInProvider>(context, listen: false).emailController.text.isNotEmpty
+        ? Future.microtask(() => context.pushReplacementNamed(Routes.managerScreen))
+        : Future.microtask(() => context.pushReplacementNamed(Routes.loginScreen));
+
   _startDelay() {
     _timer = Timer(const Duration(milliseconds: 5000), () => _goNext());
   }
@@ -35,21 +43,18 @@ class _SplashBodyState extends State<SplashBody>
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Icon(
-                Icons.quora_rounded,
-                color: Colors.blue[900],
-                size: 200,
-              ),
-              
-            ],
+          child: Image.asset(
+            AppAssets.appLogo,
+            height: height(context) * 0.5,
           ),
         ),
       ),
     );
   }
+
+
 }

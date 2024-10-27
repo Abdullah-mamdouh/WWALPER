@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:wwalper_app/core/helpers/extensions/navigator.dart';
 import 'package:wwalper_app/core/theming/colors.dart';
 
 enum ToastStates { success, error, warning }
@@ -37,7 +38,7 @@ showToast({
       fontSize: 13.sp,
     );
 
-void showErrorDialog(
+void showCustomDialog(
     {required BuildContext context,
     required String msg,
     required void Function() onTap}) {
@@ -54,13 +55,31 @@ void showErrorDialog(
           style: TextButton.styleFrom(
             textStyle: const TextStyle(
               fontSize: 14,
+              color: ColorsManager.mainRed,
               fontWeight: FontWeight.bold,
             ),
           ),
-          child: const Text(
+          child: Text(
             "Ok",
             style: TextStyle(
+              color: ColorsManager.redColor,
+              fontSize: 15.sp
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: ()=> context.pop(),
+          style: TextButton.styleFrom(
+            textStyle: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          child: Text(
+            "Cancel",
+            style: TextStyle(
               color: ColorsManager.blackColor,
+                fontSize: 15.sp
             ),
           ),
         )

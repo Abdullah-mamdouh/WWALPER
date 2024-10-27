@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:hive/hive.dart';
 part 'wallpaper_model.g.dart'; // Generated file
 
 @JsonSerializable()
@@ -33,22 +34,32 @@ class PhotosModel {
 }
 
 @JsonSerializable()
+@HiveType(typeId: 0)
 class Photos {
+  @HiveField(0)
   int? id;
+  @HiveField(1)
   int? width;
+  @HiveField(2)
   int? height;
+  @HiveField(3)
   String? url;
+  @HiveField(4)
   String? photographer;
 
+
   @JsonKey(name: 'photographer_url')
+  @HiveField(5)
   String? photographerUrl;
 
   @JsonKey(name: 'photographer_id')
+  @HiveField(6)
   int? photographerId;
 
   @JsonKey(name: 'avg_color')
+  @HiveField(7)
   String? avgColor;
-
+  @HiveField(8)
   Src? src;
 
   Photos({
@@ -71,17 +82,25 @@ class Photos {
 }
 
 @JsonSerializable()
+@HiveType(typeId: 1)
 class Src {
+  @HiveField(0)
   String? original;
 
   @JsonKey(name: 'large2x')
+  @HiveField(1)
   String? large2X; // Change field to camelCase for Dart convention
-
+  @HiveField(2)
   String? large;
+  @HiveField(3)
   String? medium;
+  @HiveField(4)
   String? small;
+  @HiveField(5)
   String? portrait;
+  @HiveField(6)
   String? landscape;
+  @HiveField(7)
   String? tiny;
 
   Src({
