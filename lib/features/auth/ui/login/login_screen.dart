@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       validator: passwordValidator(),
                       keyboardType: TextInputType.visiblePassword,
-                      isObscureText: password,
+                      isObscureText: !password,
                     ),
                     verticalSpace(20),
                     Align(

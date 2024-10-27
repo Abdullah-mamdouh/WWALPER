@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:wwalper_app/features/home/logic/home_provider.dart';
 import 'package:wwalper_app/features/home/ui/widgets/home_appbar_widget.dart';
 import 'package:wwalper_app/features/home/ui/widgets/photos_list_widget.dart';
 

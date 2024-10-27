@@ -65,8 +65,8 @@ dependencies:
   hexcolor: ^3.0.1
   flutter_snake_navigationbar: ^0.6.1
   provider: ^6.0.3
-  image_gallery_saver:
-  flutter_cache_manager:
+  image_gallery_saver: ^2.0.3
+  flutter_cache_manager: ^3.4.1
   flutter_wallpaper_manager: ^0.0.4
 
   hive: ^2.2.3
