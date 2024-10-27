@@ -90,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               : Icon(Icons.visibility_off_outlined),
                           color: ColorsManager.grayHintColor,
                         ),
-                        isObscureText: password,
+                        isObscureText: !password,
                         validator: passwordValidator(),
                         keyboardType: TextInputType.visiblePassword,
                       ),
@@ -110,7 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               : Icon(Icons.visibility_off_outlined),
                           color: ColorsManager.grayHintColor,
                         ),
-                        isObscureText: confirm,
+                        isObscureText: !confirm,
                         validator: confirmPassword(
                           ctrl: signupProvider.passwordController,
                         ),

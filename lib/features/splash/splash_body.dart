@@ -21,7 +21,7 @@ class _SplashBodyState extends State<SplashBody>
   late Timer _timer;
 
   _goNext() =>
-    Provider.of<SignInProvider>(context, listen: false).emailController.text.isNotEmpty
+      isLoggedInUser
         ? Future.microtask(() => context.pushReplacementNamed(Routes.managerScreen))
         : Future.microtask(() => context.pushReplacementNamed(Routes.loginScreen));
 

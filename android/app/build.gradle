@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.wwalper_app"
+    namespace "com.example.wwalper_app"
     compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
