@@ -33,12 +33,15 @@ class _SettingScreenState extends State<SettingScreen> {
               context: context,
               msg: "Do You want to LogOut",
               onTap: () async {
-                context.pop();
+                // context.pop();
                 debugPrint("inside Function");
+                Future.microtask(() => context.pushReplacementNamed(
+                  Routes.loginScreen,
+                ));
                 await Provider.of<SignInProvider>(context, listen: false)
                     .clearUserLoginCredentials();
                 debugPrint("storage is cleared");
-                await Future.microtask(() => context.pushReplacementNamed(
+                Future.microtask(() => context.pushReplacementNamed(
                   Routes.loginScreen,
                 ));
               }),

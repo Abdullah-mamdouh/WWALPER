@@ -84,9 +84,9 @@ class _ImageDetailScreenState extends State<ImageDetailScreen> {
                   MyIconButton(
                     icon: Icons.download_rounded,
                     iconName: 'Download',
-                    action: () {
-                      Provider.of<HomeProvider>(context, listen: false)
-                          .save(image.large2X!, context);
+                    action: () async{
+                      await Provider.of<HomeProvider>(context, listen: false)
+                          .downloadImage(image.large2X!, context);
                       showToast(
                         text: "Image Downloaded Successfully",
                         state: ToastStates.success,

@@ -46,8 +46,13 @@ class SignInProvider extends ChangeNotifier {
       emailController.text = fetchedLoginCredentials.email;
       passwordController.text = fetchedLoginCredentials.password;
       isLoggedInUser = true;
-      notifyListeners();
+
+    }else {
+      emailController.clear();
+      passwordController.clear();
+      isLoggedInUser = false;
     }
+    notifyListeners();
   }
 
   Future<void> clearUserLoginCredentials() async {
@@ -55,6 +60,7 @@ class SignInProvider extends ChangeNotifier {
       sharedPreferences.remove('LoginCredentials');
       emailController.clear();
       passwordController.clear();
+      isLoggedInUser = false;
       notifyListeners();
     }
   }

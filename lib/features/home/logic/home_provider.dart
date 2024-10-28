@@ -1,11 +1,16 @@
+
+import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
+// import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:path_provider/path_provider.dart';
+// import 'package:image_downloader/image_downloader.dart';
+// import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wwalper_app/features/home/data/home_repo.dart';
@@ -117,10 +122,10 @@ class HomeProvider extends ChangeNotifier {
   bool isFavorite = false;
   favorite(bool value) {
     isFavorite = value;
-    print(isFavorite.toString()+"///////////////////////////////");
+    debugPrint(isFavorite.toString()+"///////////////////////////////");
     notifyListeners();
   }
-
+/*
   Future<void> requestPermission(BuildContext context) async {
     // Request permissions for Android versions requiring specific media permissions.
     Map<Permission, PermissionStatus> statuses = await [
@@ -167,8 +172,8 @@ class HomeProvider extends ChangeNotifier {
       },
     );
   }
+*/
 
-/*
   requestPermission(BuildContext context) async {
     Map<Permission, PermissionStatus> statuses =
     await [Permission.storage].request();
@@ -204,27 +209,80 @@ class HomeProvider extends ChangeNotifier {
           });
     }
   }
-*/
-  save(String url, BuildContext context) async {
-    await requestPermission(context);
-    var status = await Permission.storage.status.isGranted;
-    if (status) {
-      var response = await Dio()
-          .get(url, options: Options(responseType: ResponseType.bytes));
-      final result = await ImageGallerySaver.saveImage(
-          Uint8List.fromList(response.data),
-          quality: 60,
-          name: "photo");
-      //print(result);
+  Future<void> downloadImage(String url, BuildContext context) async {
+    // Request storage permission
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+
+    // Get external storage directory
+    final directory = Directory('/storage/emulated/0/Download');//await getExternalStorageDirectory();
+    if (directory == null) {
+      debugPrint("External storage not available.");
+      return;
+    }
+
+    // Clean up the filename from URL
+    final String fileName = url.split('/').last.split('?').first;
+    final String savePath = directory.path;
+
+    try {
+      final taskId = await FlutterDownloader.enqueue(
+        url: url,
+        savedDir: savePath,
+        fileName: fileName,
+        showNotification: true, // Show notification for download status
+        openFileFromNotification: true, // Open file on download complete
+      );
+      debugPrint("////////////////////////////////////////////////////////////////////");
+      debugPrint("Download task started with ID: $taskId");
+    } catch (e) {
+      debugPrint("Download failed: $e");
     }
   }
-
+/*
+  save(String url, BuildContext context) async {
+    await requestPermission(context);
+   // await FlutterDownloader.initialize(debug: true);
+    // Check and request storage permission
+    final dir =
+    await getApplicationDocumentsDirectory();
+//From path_provider package
+    var _localPath = dir.path;
+    final String fileName = url.split('/').last.split('?').first;
+    // final savedDir = Directory(_localPath);
+    try {
+      final taskId = await FlutterDownloader.enqueue(
+        url: url,
+        fileName: fileName,
+        savedDir: _localPath, // Specify your save directory
+        showNotification: true, // Show notification when the download starts
+        openFileFromNotification: true, // Open the file when the download is finished
+      );
+    }catch(e){
+      debugPrint(e.toString()+"////////////////////////////////////////");
+    }
+    //debugPrint("Download task id: $taskId");
+    // await requestPermission(context);
+    // var status = await Permission.storage.status.isGranted;
+    // if (status) {
+    //   var response = await Dio()
+    //       .get(url, options: Options(responseType: ResponseType.bytes));
+    //   final result = await ImageGallerySaver.saveImage(
+    //       Uint8List.fromList(response.data),
+    //       quality: 60,
+    //       name: "photo");
+    //   //debugPrint(result);
+    // }
+  }
+*/
   Future<void> setwallpaper(String imageUrl) async {
-    int location = WallpaperManager.HOME_SCREEN;
+    /*int location = WallpaperManager.HOME_SCREEN;
 
     var file = await DefaultCacheManager().getSingleFile(imageUrl);
     final bool result =
-    (await WallpaperManager.setWallpaperFromFile(file.path, location));
+    (await WallpaperManager.setWallpaperFromFile(file.path, location));*/
   }
 
 }

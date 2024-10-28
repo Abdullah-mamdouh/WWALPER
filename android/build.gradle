@@ -1,13 +1,20 @@
-allprojects {
-    ext.kotlin_version = '1.7.0' // Update this line to the desired version
+buildscript {
+    ext.kotlin_version = '1.7.10' // Define Kotlin version here
     repositories {
         google()
         mavenCentral()
     }
-    dependencies {
-        classpath "com.android.tools.build:gradle:8.1.1" // Example version
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // Other classpaths...
+//    dependencies {
+//        classpath "com.android.tools.build:gradle:8.1.1"
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        // Other classpaths...
+//    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
     }
 }
 
