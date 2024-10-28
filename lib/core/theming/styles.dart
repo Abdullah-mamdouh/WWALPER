@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:wwalper_app/core/theming/colors.dart';
 import 'package:wwalper_app/core/theming/font_weight_helper.dart';
 
@@ -27,7 +28,7 @@ class TextStyles {
   static TextStyle font20BlackBold = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.bold,
-    color: Colors.black,
+    //color: Colors.black,
   );
 
   static TextStyle font17MainPinkBold = TextStyle(
@@ -43,8 +44,8 @@ class TextStyles {
 
   static TextStyle font15BlackSemiBold = TextStyle(
     fontSize: 15.sp,
-    fontWeight: FontWeightHelper.semiBold,
-    color: Colors.black,
+    fontWeight: FontWeightHelper.regular,
+
   );
 
   static TextStyle font15BlackBold = TextStyle(
@@ -134,7 +135,7 @@ class TextStyles {
   static TextStyle font14DarkBlueMedium = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.medium,
-    color: ColorsManager.darkBlue,
+    //color: ColorsManager.darkBlue,
   );
 
   static TextStyle font15DarkBlueMedium = TextStyle(

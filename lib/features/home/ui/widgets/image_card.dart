@@ -37,7 +37,8 @@ class _ImageCardState extends State<ImageCard> {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
-            color: Theme.of(context).cardColor),
+            color: Theme.of(context).cardColor
+        ),
         child: Stack(
           children: [
             ClipRRect(

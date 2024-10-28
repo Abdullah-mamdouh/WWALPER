@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:wwalper_app/core/theming/colors.dart';
 import 'package:wwalper_app/core/theming/styles.dart';
+import 'package:wwalper_app/core/theming/theme_provider.dart';
 
 class AppTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
@@ -45,16 +47,16 @@ class AppTextFormField extends StatelessWidget {
         focusedBorder: focusedBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
-                color: ColorsManager.mainBlue,
-                width: 1.3,
+                color: ColorsManager.moreLightGray,
+                width: 0.9,
               ),
-              borderRadius: BorderRadius.circular(16.0),
+              borderRadius: BorderRadius.circular(12.0.r),
             ),
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
                 color: ColorsManager.lighterGray,
-                width: 1.3,
+                width: 0.1,
               ),
               borderRadius: BorderRadius.circular(12.0.r),
             ),
@@ -75,15 +77,17 @@ class AppTextFormField extends StatelessWidget {
         hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
         hintText: hintText,
         suffixIcon: suffixIcon,
-        fillColor: backgroundColor ?? ColorsManager.grayLightColor,
+        fillColor: backgroundColor ??
+            (Provider.of<ThemeProvider>(context, listen: false).isDark
+                ? ColorsManager.moreGrayColor
+                : ColorsManager.grayLightColor),
         filled: true,
       ),
       obscureText: isObscureText ?? false,
       style: TextStyles.font14DarkBlueMedium,
       onChanged: onChangeFunction,
-
       validator: validator ??
-              (val) {
+          (val) {
             return null;
           },
     );

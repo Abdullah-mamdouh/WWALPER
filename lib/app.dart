@@ -10,6 +10,7 @@ import 'package:wwalper_app/features/favorite/logic/favorite_provider.dart';
 import 'package:wwalper_app/features/home/logic/home_provider.dart';
 import './core/routing/app_router.dart';
 import './core/routing/routes.dart';
+import 'core/theming/theme_provider.dart';
 
 class MyApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -43,34 +44,42 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (_) => getIt<SignupProvider>()),
             ChangeNotifierProvider(create: (_) => getIt<PhotosProvider>()),
           ],
-          child: MaterialApp(
-            // theme: ThemeData(
-            // useMaterial3: false,
-            // scaffoldBackgroundColor: AppColors.whiteColor,
-            // appBarTheme: const AppBarTheme(
-            //   titleSpacing: 0,
-            //   titleTextStyle: TextStyle(
-            //     fontSize: 18,
-            //     fontWeight: FontWeight.w700,
-            //   ),
-            //   backgroundColor: ColorsManager.mainBlue,
-            //   // titleTextStyle: TextStyles.font15WhiteBold,
-            //   centerTitle: false,
-            //   iconTheme: const IconThemeData(
-            //     color:AppColors.whiteColor
-            //   )
-            // ),
-            // fontFamily: ConstantsText.kAvenir
-            // ),
+          child: ChangeNotifierProvider(
+              create: (context) => ThemeProvider(),
+              builder: (context, _) {
+                final themeProvider = Provider.of<ThemeProvider>(context);
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  themeMode: Provider.of<ThemeProvider>(context).themeMode,
+                  theme: MyThemes.lightTheme,
+                  darkTheme: MyThemes.darkTheme,
+                  // theme: ThemeData(
+                  // useMaterial3: false,
+                  // scaffoldBackgroundColor: AppColors.whiteColor,
+                  // appBarTheme: const AppBarTheme(
+                  //   titleSpacing: 0,
+                  //   titleTextStyle: TextStyle(
+                  //     fontSize: 18,
+                  //     fontWeight: FontWeight.w700,
+                  //   ),
+                  //   backgroundColor: ColorsManager.mainBlue,
+                  //   // titleTextStyle: TextStyles.font15WhiteBold,
+                  //   centerTitle: false,
+                  //   iconTheme: const IconThemeData(
+                  //     color:AppColors.whiteColor
+                  //   )
+                  // ),
+                  // fontFamily: ConstantsText.kAvenir
+                  // ),
 
-            title: "Infancia App",
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            debugShowCheckedModeBanner: false,
-            initialRoute: Routes.splashScreen,
-            onGenerateRoute: appRouter.generateRoute,
-          ),
+                  title: "WWLPER",
+                  localizationsDelegates: context.localizationDelegates,
+                  supportedLocales: context.supportedLocales,
+                  locale: context.locale,
+                  initialRoute: Routes.splashScreen,
+                  onGenerateRoute: appRouter.generateRoute,
+                );
+              }),
         ));
   }
 }

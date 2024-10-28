@@ -17,13 +17,14 @@ class AppOutLineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: ButtonStyle(
+
           fixedSize: WidgetStatePropertyAll(Size(width(context), 65.h)),
           iconSize: WidgetStatePropertyAll(20.h),
-          backgroundColor: WidgetStatePropertyAll(ColorsManager.whiteColor),
+          // backgroundColor: WidgetStatePropertyAll(ColorsManager.whiteColor),
           side: WidgetStatePropertyAll(
             const BorderSide(
-              color: ColorsManager.lighterGray,
-              width: 1.3,
+              color: ColorsManager.moreLightGray,
+              width: 0.2,
             ),
           ),
           shape: WidgetStatePropertyAll(RoundedRectangleBorder(

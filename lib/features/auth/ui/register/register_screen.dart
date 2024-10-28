@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:wwalper_app/core/helpers/extensions/navigator.dart';
 import 'package:wwalper_app/core/routing/routes.dart';
 import 'package:wwalper_app/core/theming/styles.dart';
+import 'package:wwalper_app/core/theming/theme_provider.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/helpers/validator/validators.dart';
@@ -128,7 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       verticalSpace(40),
                       TextHintWidget(text: AppStrings.socialAccountKey),
-                      verticalSpace(10),
+                      verticalSpace(30),
                       Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -153,24 +154,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Expanded(
                               child: AppOutLineButton(
                                 text: AppStrings.googleKey,
-                                style: TextStyles.font16WhiteSemiBold
-                                    .copyWith(color: ColorsManager.blackColor),
-                                icon: Image.asset(
-                                  AppAssets.google,
-                                  width: 30.w,
-                                  height: 36.h,
+                                style: TextStyles.font16WhiteSemiBold.copyWith(
+                                  color: Provider.of<ThemeProvider>(context).isDark ? Colors.white : Colors.black
+                                ),
+                                icon: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  backgroundImage: AssetImage( AppAssets.google,),radius: 20,
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      verticalSpace(20),
+                      verticalSpace(30),
                       RichText(
                         text: TextSpan(
                           text: AppStrings.dontHaveAnAccount,
-                          style: TextStyles.font15BlackSemiBold
-                              .copyWith(color: ColorsManager.blackColor),
+                          style: TextStyles.font15BlackSemiBold.copyWith(
+                            color: Provider.of<ThemeProvider>(context).isDark ? Colors.white: Colors.black,
+                          ),
                           children: <TextSpan>[
                             TextSpan(
                               recognizer: TapGestureRecognizer()

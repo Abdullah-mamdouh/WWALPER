@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:wwalper_app/core/theming/colors.dart';
 import 'package:wwalper_app/core/utils/app_assets.dart';
+
+import '../../../../core/theming/theme_provider.dart';
 
 class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBarWidget({super.key});
@@ -12,7 +15,7 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: Colors.transparent,
       shadowColor: Colors.grey.withOpacity(0.1),
       elevation: 3.0,
-      backgroundColor: Colors.white,
+      backgroundColor: Provider.of<ThemeProvider>(context).isDark ? Colors.black : Colors.white,
       automaticallyImplyLeading: false,
       centerTitle: false,
       title: Row(

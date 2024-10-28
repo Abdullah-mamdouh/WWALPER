@@ -6,6 +6,7 @@ class ColorsManager {
   static const Color grayLightColor = Color(0xFFF1F1F3);
   static const Color grayHintColor = Color(0xFFAFB7C2);
   static const Color blackColor = Color(0xff000000);
+  static const Color moreGrayColor = Color(0xff414753);
   static const Color whiteColor = Color(0xffFFFFFF);
   static const Color redColor = Color(0xffFF2C54);
   static const Color deepOrangeColor = Colors.deepOrange;

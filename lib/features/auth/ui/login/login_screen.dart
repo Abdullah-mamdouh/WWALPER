@@ -7,6 +7,7 @@ import 'package:wwalper_app/core/helpers/spacing.dart';
 import 'package:wwalper_app/core/helpers/validator/validators.dart';
 import 'package:wwalper_app/core/theming/colors.dart';
 import 'package:wwalper_app/core/theming/styles.dart';
+import 'package:wwalper_app/core/theming/theme_provider.dart';
 import 'package:wwalper_app/core/utils/app_strings.dart';
 import 'package:wwalper_app/core/utils/constants.dart';
 import 'package:wwalper_app/core/widgets/app_text_button.dart';
@@ -105,9 +106,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               validateThenDoLogin(context);
                             },
                           ),
-                          verticalSpace(40),
+                          verticalSpace(50),
                           TextHintWidget(text: AppStrings.socialAccountKey),
-                          verticalSpace(10),
+                          verticalSpace(20),
                           BouncingButton(
                             color: ColorsManager.blueColor,
                             icon: Image.asset(
@@ -123,19 +124,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           verticalSpace(15),
                           AppOutLineButton(
                               text: AppStrings.signInGoogleKey,
-                              style: TextStyles.font16WhiteSemiBold
-                                  .copyWith(color: ColorsManager.blackColor),
-                              icon: Image.asset(
-                                AppAssets.google,
-                                width: 25.w,
-                                height: 36.h,
-                              )),
-                          verticalSpace(20),
+                              style: TextStyles.font16WhiteSemiBold.copyWith(
+                                color: Provider.of<ThemeProvider>(context).isDark ? Colors.white: Colors.black,
+                              ),
+                              icon: CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                backgroundImage: AssetImage( AppAssets.google,),radius: 18.r,
+                              ),),
+                          verticalSpace(30),
                           RichText(
                             text: TextSpan(
                               text: AppStrings.dontHaveAnAccount,
-                              style: TextStyles.font15BlackSemiBold
-                                  .copyWith(color: ColorsManager.blackColor),
+                              style: TextStyles.font15BlackSemiBold.copyWith(
+                                color: Provider.of<ThemeProvider>(context).isDark ? Colors.white: Colors.black,
+                              ),
                               children: <TextSpan>[
                                 TextSpan(
                                   recognizer: TapGestureRecognizer()

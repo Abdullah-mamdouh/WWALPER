@@ -44,7 +44,7 @@ class _SplashBodyState extends State<SplashBody>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+
       body: Center(
         child: SingleChildScrollView(
           child: Image.asset(

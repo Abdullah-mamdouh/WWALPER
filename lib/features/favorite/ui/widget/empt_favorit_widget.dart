@@ -21,7 +21,7 @@ class EmptyFavoritWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ArrowBackWidget(),
+            /*ArrowBackWidget(),
             verticalSpace(20),
             Text(
               AppStrings.favoriteKey,
@@ -30,7 +30,7 @@ class EmptyFavoritWidget extends StatelessWidget {
             verticalSpace(10),
             TextHintWidget(
               text: AppStrings.favoritePhotosDescripKey,
-            ),
+            ),*/
             verticalSpace(30),
             Expanded(
               child: Image.asset(

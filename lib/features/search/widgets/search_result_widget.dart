@@ -15,8 +15,8 @@ class SearchResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding:  EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.0.w),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.0.w),
       child: Consumer<HomeProvider>(builder: (context, provider, _) {
           final state = provider.state;
           if (state is Loading) {

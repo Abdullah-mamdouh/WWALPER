@@ -23,7 +23,7 @@ class AppStrings {
   static const String socialAccountKey = 'Or Continue With Social Account';
   static const String facebookKey = 'Facebook';
   static const String googleKey = 'Google';
-  static const String alreadyHaveAnAccount = "Already Have An Account?";
+  static const String alreadyHaveAnAccount = "Already Have An Account? ";
   static const String signinKey = 'Sign In';
   static const String registerSuccessfullKey = 'Account created Successfully';
 
@@ -35,7 +35,7 @@ class AppStrings {
   static const String forgetPasswordkey = 'Forgot Your Password ?';
   static const String signInFacebookKey = 'Sign In With Facebook';
   static const String signInGoogleKey = 'Sign In With Google';
-  static const String dontHaveAnAccount = "Don't Have An Account?";
+  static const String dontHaveAnAccount = "Don't Have An Account? ";
   static const String loginKey = 'Login';
   static const String signupKey = 'Sign Up';
 
